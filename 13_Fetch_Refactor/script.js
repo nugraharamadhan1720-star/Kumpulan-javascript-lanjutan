@@ -39,6 +39,7 @@ searchButton.addEventListener('click' , async function () {
   const inputKeyword = document.querySelector('.input-keyword');
   const movies = await getMovies(inputKeyword.value);
   console.log(movies);
+  console.log(movies);
   updateUI(movies);
 
 });
