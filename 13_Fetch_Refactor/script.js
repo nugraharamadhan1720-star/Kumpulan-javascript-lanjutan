@@ -44,10 +44,36 @@ searchButton.addEventListener('click' , async function () {
 
 });
 
+
+
+// event binding
+document.addEventListener('click', async function(e) {
+  if( e.target.classList.contains('modal-detail-button')) {
+    const imdbid = e.target.dataset.imdbid;
+    const movieDetail = await getMovieDetail(imdbid);
+    updateUIDetail(movieDetail);
+  }
+});
+
+function getMovieDetail(imdbid) {
+  return fetch('https://www.omdbapi.com/?apikey=294c8cf6&i=' + imdbid)
+    .then(response => response.json())
+    .then(m => m);
+}
+
+function updateUIDetail(m) {
+  const movieDetail = showMovieDetail(m);
+  const modalBody = document.querySelector('.modal-body');
+  modalBody.innerHTML = movieDetail;
+  }
+
+
+
+
 function getMovies(keyword) {
   return fetch('https://www.omdbapi.com/?apikey=294c8cf6&s=' + keyword)
   .then(response => response.json())
- .then(response => response.search);  
+ .then(response => response.Search);  
 }
 
 function updateUI(movies) {
